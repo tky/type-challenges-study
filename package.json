@@ -10,6 +10,7 @@
     "readme": "esno ./scripts/readme.ts",
     "build": "esno ./scripts/build.ts",
     "generate": "esno ./scripts/generate-play.ts",
+    "check": "esno ./scripts/check.ts",
     "lint": "eslint .",
     "translate": "esno ./scripts/translate-cli.ts",
     "utils:release": "pnpm -C utils release"
