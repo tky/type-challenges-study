@@ -29,7 +29,7 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type MyReadonly<T> = { [P in keyof T]: readonly T[P] }
+type MyReadonly<T> = { readonly [P in keyof T]: T[P] }
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
