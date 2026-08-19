@@ -22,7 +22,14 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type Length<T> = any
+type Length<T extends readonly any[]> = T['length'];
+
+ /*
+type Length<T extends readonly any[], Acc extends any[] = []> =
+    T extends readonly [any, ...infer Rest]
+      ? Length<Rest, [...Acc, any]>   // T を1つ削り、Acc を1つ積む
+    : Acc['length']
+*/
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
