@@ -22,7 +22,7 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type MyAwaited<T> = any
+type MyAwaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
