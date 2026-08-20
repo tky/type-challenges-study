@@ -18,7 +18,13 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type Includes<T extends readonly any[], U> = any
+
+
+type Includes<T extends readonly any[], U> = T extends readonly [infer V, ...infer Rest]
+    ? Equal<V, U> extends true
+      ? true
+      : Includes<Rest, U>
+    : false
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
