@@ -28,10 +28,12 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type MyOmit<T, K> = any
+type MyOmit<T, K extends keyof T> = { [V in keyof T as V extends K ? never : V]: T[V] }
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
+
+  type t =  MyOmit<Todo, 'description'>
 
 type cases = [
   Expect<Equal<Expected1, MyOmit<Todo, 'description'>>>,
