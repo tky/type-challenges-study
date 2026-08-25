@@ -25,7 +25,7 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type MyReturnType<T> = any
+type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never; 
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
