@@ -36,11 +36,14 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type DeepReadonly<T> = any
+type DeepReadonly<T> = T extends (...args: any[]) => any
+  ? T
+  : { readonly [K in keyof T]: DeepReadonly<T[K]> }
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
+type t = DeepReadonly<X1>
 type cases = [
   Expect<Equal<DeepReadonly<X1>, Expected1>>,
   Expect<Equal<DeepReadonly<X2>, Expected2>>,
