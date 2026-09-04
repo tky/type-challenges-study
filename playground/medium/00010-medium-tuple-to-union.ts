@@ -20,7 +20,12 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type TupleToUnion<T> = any
+/*
+type TupleToUnion<T extends any []> = T extends [infer F, ... infer Rest] 
+  ? F | TupleToUnion<Rest>
+  : never;
+*/
+type TupleToUnion<T extends any []> = T[number]
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
