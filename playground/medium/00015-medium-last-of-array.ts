@@ -24,7 +24,15 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type Last<T extends any[]> = any
+/*
+type Last<T extends any[]> = T extends [infer F, ...infer Rest]
+  ? Rest extends [] ? F : Last<Rest>
+  : never;
+*/
+
+type Last<T extends any[]>  = T extends [...infer _, infer L] ? L : never;
+
+type t = Last<[3, 2, 1]>
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
