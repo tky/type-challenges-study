@@ -23,7 +23,14 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-declare function PromiseAll(values: any): any
+type Unwrap<T> = T extends Promise<infer U> ? U : T
+
+type UnwrapAll<T extends readonly unknown[]> = {
+    [K in keyof T]: Unwrap<T[K]>
+}
+
+
+declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<UnwrapAll<T>>
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

@@ -29,7 +29,14 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type LookUp<U, T> = any
+
+type LookUp<U extends { type: string }, T> = U extends { type: T } ? U : never;
+/*
+  LookUp<Animal, 'dog'> は次のように分配される
+  (Cat extends { type: 'dog' } ? Cat : never) | (Dog extends { type: 'dog' } ? Dog : never)
+  // never | Dog
+  // Dog
+*/
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -46,6 +53,7 @@ interface Dog {
 }
 
 type Animal = Cat | Dog
+
 
 type cases = [
   Expect<Equal<LookUp<Animal, 'dog'>, Dog>>,
