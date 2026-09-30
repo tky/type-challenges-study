@@ -16,10 +16,17 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type Permutation<T> = any
+type Permutation<T, K = T> =
+  [T] extends [never]
+    ? []
+    : K extends K
+      ? [K, ...Permutation<Exclude<T, K>>]
+      : never;
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
+
+type t = Permutation<'A' | 'B' | 'C'>
 
 type cases = [
   Expect<Equal<Permutation<'A'>, ['A']>>,
