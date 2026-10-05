@@ -12,7 +12,10 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type LengthOfString<S extends string> = any
+type LengthOfString<S extends string, Acc extends unknown[] = []> =
+  S extends `${infer _Head}${infer Rest}`
+  ? LengthOfString<Rest, [...Acc, unknown]>
+  : Acc['length']
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
