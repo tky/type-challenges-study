@@ -18,7 +18,12 @@
 
 /* _____________ ここにコードを記入 _____________ */
 
-type Flatten = any
+type Flatten<S extends any []> =  
+  S extends [infer Head, ...infer Tail]
+    ? Head extends any[]
+      ? [...Flatten<Head>, ...Flatten<Tail>]
+      : [Head, ...Flatten<Tail>]
+    : []
 
 /* _____________ テストケース _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
